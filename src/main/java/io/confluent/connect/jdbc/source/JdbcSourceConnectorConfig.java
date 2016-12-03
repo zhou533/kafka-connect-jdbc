@@ -150,6 +150,11 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
       + "Every following execution will get data from the last time we fetched until current time minus the delay.";
   public static final long TIMESTAMP_DELAY_INTERVAL_MS_DEFAULT = 0;
   private static final String TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY = "Delay Interval (ms)";
+  
+  public static final String COLUMN_PREFIX_CONFIG = "column.prefix";
+  public static final String COLUMN_PREFIX_DOC = "column.prefix for join situation";
+  public static final String COLUMN_PREFIX_DEFAULT = "";
+  public static final String COLUMN_PREFIX_DISPALY = "column prefix";
 
   public static final String DATABASE_GROUP = "Database";
   public static final String MODE_GROUP = "Mode";
@@ -198,7 +203,8 @@ public class JdbcSourceConnectorConfig extends AbstractConfig {
         .define(BATCH_MAX_ROWS_CONFIG, Type.INT, BATCH_MAX_ROWS_DEFAULT, Importance.LOW, BATCH_MAX_ROWS_DOC, CONNECTOR_GROUP, 2, Width.SHORT, BATCH_MAX_ROWS_DISPLAY)
         .define(TABLE_POLL_INTERVAL_MS_CONFIG, Type.LONG, TABLE_POLL_INTERVAL_MS_DEFAULT, Importance.LOW, TABLE_POLL_INTERVAL_MS_DOC, CONNECTOR_GROUP, 3, Width.SHORT, TABLE_POLL_INTERVAL_MS_DISPLAY)
         .define(TOPIC_PREFIX_CONFIG, Type.STRING, Importance.HIGH, TOPIC_PREFIX_DOC, CONNECTOR_GROUP, 4, Width.MEDIUM, TOPIC_PREFIX_DISPLAY)
-        .define(TIMESTAMP_DELAY_INTERVAL_MS_CONFIG, Type.LONG, TIMESTAMP_DELAY_INTERVAL_MS_DEFAULT, Importance.HIGH, TIMESTAMP_DELAY_INTERVAL_MS_DOC, CONNECTOR_GROUP, 5, Width.MEDIUM, TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY);
+        .define(TIMESTAMP_DELAY_INTERVAL_MS_CONFIG, Type.LONG, TIMESTAMP_DELAY_INTERVAL_MS_DEFAULT, Importance.HIGH, TIMESTAMP_DELAY_INTERVAL_MS_DOC, CONNECTOR_GROUP, 5, Width.MEDIUM, TIMESTAMP_DELAY_INTERVAL_MS_DISPLAY)
+        .define(COLUMN_PREFIX_CONFIG, Type.STRING, COLUMN_PREFIX_DEFAULT, Importance.HIGH, COLUMN_PREFIX_DOC, DATABASE_GROUP, 7, Width.LONG, COLUMN_PREFIX_DISPALY);
   }
 
   public static final ConfigDef CONFIG_DEF = baseConfigDef();

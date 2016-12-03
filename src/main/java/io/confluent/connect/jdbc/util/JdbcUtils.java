@@ -195,6 +195,12 @@ public class JdbcUtils {
     return quote + orig + quote;
   }
 
+  public static String quoteString(String origPrefix, String orig, String quote) {
+    if (origPrefix != null && !origPrefix.isEmpty()) {
+      return quote + origPrefix + quote + '.' + quoteString(orig, quote);
+    }
+    return quoteString(orig, quote);
+  }
   /**
    * Return current time at the database
    * @param conn

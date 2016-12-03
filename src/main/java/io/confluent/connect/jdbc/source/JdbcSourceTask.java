@@ -139,18 +139,19 @@ public class JdbcSourceTask extends SourceTask {
       Map<String, Object> offset = offsets == null ? null : offsets.get(partition);
 
       String topicPrefix = config.getString(JdbcSourceTaskConfig.TOPIC_PREFIX_CONFIG);
+      String columnPrefix = config.getString(JdbcSourceTaskConfig.COLUMN_PREFIX_CONFIG);
 
       if (mode.equals(JdbcSourceTaskConfig.MODE_BULK)) {
         tableQueue.add(new BulkTableQuerier(queryMode, tableOrQuery, schemaPattern, topicPrefix));
       } else if (mode.equals(JdbcSourceTaskConfig.MODE_INCREMENTING)) {
         tableQueue.add(new TimestampIncrementingTableQuerier(
-            queryMode, tableOrQuery, topicPrefix, null, incrementingColumn, offset, timestampDelayInterval, schemaPattern));
+            queryMode, tableOrQuery, topicPrefix, null, incrementingColumn, columnPrefix, offset, timestampDelayInterval, schemaPattern));
       } else if (mode.equals(JdbcSourceTaskConfig.MODE_TIMESTAMP)) {
         tableQueue.add(new TimestampIncrementingTableQuerier(
-            queryMode, tableOrQuery, topicPrefix, timestampColumn, null, offset, timestampDelayInterval, schemaPattern));
+            queryMode, tableOrQuery, topicPrefix, timestampColumn, null, columnPrefix, offset, timestampDelayInterval, schemaPattern));
       } else if (mode.endsWith(JdbcSourceTaskConfig.MODE_TIMESTAMP_INCREMENTING)) {
         tableQueue.add(new TimestampIncrementingTableQuerier(
-            queryMode, tableOrQuery, topicPrefix, timestampColumn, incrementingColumn, offset, timestampDelayInterval, schemaPattern));
+            queryMode, tableOrQuery, topicPrefix, timestampColumn, incrementingColumn, columnPrefix, offset, timestampDelayInterval, schemaPattern));
       }
     }
 
